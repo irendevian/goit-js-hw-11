@@ -92,8 +92,8 @@ li {
   border: 1px solid #808080;
 }
 
-/* .loader {
-  color: #fff;
+.loader {
+  color: #00000073;
   font-size: 10px;
   width: 1em;
   height: 1em;
@@ -102,6 +102,8 @@ li {
   text-indent: -9999em;
   animation: mulShdSpin 1.3s infinite linear;
   transform: translateZ(0);
+  margin: 0 auto;
+  margin-top: 100px;
 }
 
 @keyframes mulShdSpin {
@@ -138,4 +140,8 @@ li {
     box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em,
       0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
   }
-} */
+}
+
+.hidden {
+  display: none;
+}

@@ -1,8 +1,8 @@
 import { getImagesByQuery } from './js/pixabay-api.js';
 import { createGallery } from './js/render-functions.js';
 import { clearGallery } from './js/render-functions.js';
-// import { showLoader } from './js/render-functions.js';
-// import { hideLoader } from './js/render-functions.js';
+import { showLoader } from './js/render-functions.js';
+import { hideLoader } from './js/render-functions.js';
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 import { lightbox } from './js/render-functions.js';
@@ -10,7 +10,6 @@ import { lightbox } from './js/render-functions.js';
 
 const form = document.querySelector(".form");
 const input = document.querySelector("input");
-const loader = document.querySelector(".loader");
 export const gallery = document.querySelector(".gallery");
 
 form.addEventListener("submit", handleSubmit);
@@ -28,6 +27,8 @@ function handleSubmit(event) {
         // })
         return;
     }
+
+    showLoader();
 
     getImagesByQuery(userValueInput)
     .then(res => {
@@ -49,9 +50,9 @@ function handleSubmit(event) {
              console.log(error);
              
     })
-    // .finally(() => {
-    //         loader.classList.add("hidden");
-    // })
+    .finally(() => {
+        hideLoader();
+    })
 
     clearGallery();
 }
