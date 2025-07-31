@@ -1,5 +1,6 @@
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
+import { gallery } from "../main";
 
 
 export function createGallery(images) {
@@ -18,18 +19,17 @@ export function createGallery(images) {
     `).join("");
 }
 
- export const lightbox = new SimpleLightbox('.gallery a', {
+
+ const lightbox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
     captionsDelay: 250,
-});
+ });
 
-import { gallery } from "../main";
 
 export function clearGallery() {
     gallery.innerHTML = "";
     lightbox.refresh();
 }
-
 
 const loader = document.querySelector(".loader");
 

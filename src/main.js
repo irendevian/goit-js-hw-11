@@ -5,7 +5,6 @@ import { showLoader } from './js/render-functions.js';
 import { hideLoader } from './js/render-functions.js';
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
-import { lightbox } from './js/render-functions.js';
 
 
 const form = document.querySelector(".form");
@@ -41,7 +40,6 @@ function handleSubmit(event) {
                 position: 'topRight'
             })
         } else {
-            lightbox.refresh();
             gallery.insertAdjacentHTML("beforeend", createGallery(images));
         }
         
