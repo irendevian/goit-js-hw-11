@@ -1,23 +1,31 @@
 import { getImagesByQuery } from './js/pixabay-api.js';
-// import createGallery(images) from render - functions.js;
-// import clearGallery() from render - functions.js;
-// import showLoader() from render - functions.js;
-// import hideLoader() from render - functions.js;
+import { createGallery } from './js/render-functions.js';
+import { clearGallery } from './js/render-functions.js';
+// import { showLoader } from './js/render-functions.js';
+// import { hideLoader } from './js/render-functions.js';
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
+import { lightbox } from './js/render-functions.js';
 
 
 const form = document.querySelector(".form");
 const input = document.querySelector("input");
-const gallery = document.querySelector(".gallery");
+const loader = document.querySelector(".loader");
+export const gallery = document.querySelector(".gallery");
 
 form.addEventListener("submit", handleSubmit);
 
 function handleSubmit(event) {
     event.preventDefault();
 
-    const userValueInput = input.value.trim();
+    const userValueInput = input.value.toLowerCase().trim();
 
     if (!userValueInput) {
-        alert("Заповніть поле!");
+         // iziToast.warning({
+        //     title: 'Warning',
+        //     message: 'Fill in the field!',
+        //     position:  'topRight'
+        // })
         return;
     }
 
@@ -26,17 +34,25 @@ function handleSubmit(event) {
         const images = res.data.hits;
 
         if (images.length === 0) {
-            alert("Sorry, there are no images matching your search query. Please try again!")
+            iziToast.error({
+                title: 'Error',
+                message: 'Sorry, there are no images matching your search query. Please try again!',
+                position: 'topRight'
+            })
         } else {
-            gallery.innerHTML = "";
-            gallery.insertAdjacentHTML("beforeend", createMarkup(images));
+            lightbox.refresh();
+            gallery.insertAdjacentHTML("beforeend", createGallery(images));
         }
-             
+        
          })
     .catch(error => {
              console.log(error);
              
-         })
+    })
+    // .finally(() => {
+    //         loader.classList.add("hidden");
+    // })
 
+    clearGallery();
 }
 
