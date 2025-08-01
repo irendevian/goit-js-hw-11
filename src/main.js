@@ -19,20 +19,19 @@ function handleSubmit(event) {
     const userValueInput = input.value.toLowerCase().trim();
 
     if (!userValueInput) {
-         // iziToast.warning({
-        //     title: 'Warning',
-        //     message: 'Fill in the field!',
-        //     position:  'topRight'
-        // })
+         iziToast.warning({
+            title: 'Warning',
+            message: 'Fill in the field!',
+            position:  'topRight'
+        })
         return;
     }
 
     showLoader();
+    clearGallery();
 
     getImagesByQuery(userValueInput)
-    .then(res => {
-        const images = res.data.hits;
-
+    .then( images => {
         if (images.length === 0) {
             iziToast.error({
                 title: 'Error',
@@ -40,7 +39,7 @@ function handleSubmit(event) {
                 position: 'topRight'
             })
         } else {
-            gallery.insertAdjacentHTML("beforeend", createGallery(images));
+            createGallery(images);
         }
         
          })
@@ -52,6 +51,5 @@ function handleSubmit(event) {
         hideLoader();
     })
 
-    clearGallery();
 }
 

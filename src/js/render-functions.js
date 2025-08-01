@@ -5,7 +5,7 @@ import { gallery } from "../main";
 
 export function createGallery(images) {
 
-    return images.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
+    const markup = images.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
         <li>
             <a href="${largeImageURL}">
             <img src="${webformatURL}" alt="${tags}" width="360"/></a>
@@ -17,6 +17,10 @@ export function createGallery(images) {
             </div>
         </li>
     `).join("");
+
+    gallery.insertAdjacentHTML("beforeend", markup);
+    lightbox.refresh();
+
 }
 
 
